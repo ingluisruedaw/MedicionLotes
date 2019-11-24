@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/05/2016 02:10:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Area" table="area" catalog="zeus_lote" optimistic-lock="version">
+        <id name="id" type="long">
+            <column name="Id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="terreno" class="Model.Terreno" fetch="select">
+            <column name="terreno_Id" not-null="true" />
+        </many-to-one>
+        <property name="titulo" type="string">
+            <column name="Titulo" length="155" not-null="true" />
+        </property>
+        <property name="distanciaMaxima" type="double">
+            <column name="Distancia_Maxima" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="espaciado" type="double">
+            <column name="Espaciado" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="total" type="double">
+            <column name="Total" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="puntoses" table="puntos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area_Id" not-null="true" />
+            </key>
+            <one-to-many class="Model.Puntos" />
+        </set>
+    </class>
+</hibernate-mapping>
